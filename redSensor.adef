@@ -1,0 +1,31 @@
+version: 1.0
+
+executables:
+{
+    redSensor = ( sensorsComponent periodicSensor )
+}
+
+processes:
+{
+    run:
+    {
+        ( redSensor )
+    }
+
+    envVars:
+    {
+        LE_LOG_LEVEL = INFO
+    }
+}
+
+bindings:
+{
+    redSensor.sensorsComponent.le_adc -> modemService.le_adc
+
+    redSensor.sensorsComponent.le_pos -> positioningService.le_pos
+    redSensor.sensorsComponent.le_posCtrl -> positioningService.le_posCtrl
+
+    redSensor.sensorsComponent.dhubIO -> dataHub.io
+
+    redSensor.periodicSensor.dhubIO -> dataHub.io
+}
